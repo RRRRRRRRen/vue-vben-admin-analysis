@@ -1,0 +1,32 @@
+# 指示此文件为顶级文件，表示 EditorConfig 配置的起始点。
+root = true
+
+# 所有文件的通用设置
+[*]
+# 指定字符编码为 UTF-8
+charset=utf-8
+# 指定换行符为 LF（Line Feed）
+end_of_line=lf
+# 在文件末尾插入空行
+insert_final_newline=true
+# 使用空格进行缩进
+indent_style=space
+# 指定缩进的空格数为 2
+indent_size=2
+# 指定最大行长度为 100，超过该长度的行将被视为过长。
+max_line_length = 100
+
+# 适用于所有扩展名为 .yml、.yaml 和 .json 的文件。
+[*.{yml,yaml,json}]
+indent_style = space
+indent_size = 2
+
+# 适用于所有扩展名为 .md 的 Markdown 文件。
+[*.md]
+# 不移除 Markdown 文件末尾的空格。
+trim_trailing_whitespace = false
+
+# 适用于名为 Makefile 的文件。
+[Makefile]
+# 对于 Makefile 文件，使用制表符进行缩进。
+indent_style = tab
