@@ -4,24 +4,58 @@
   "private": true,
   "scripts": {
     "build": "vue-tsc && vite build",
+    "commit": "czg",
     "dev": "vite",
+    "preinstall": "npx only-allow pnpm",
     "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write .",
     "lint:stylelint": "stylelint \"**/*.{css,less,scss,html,vue}\" --fix",
-    "preview": "vite preview"
+    "prepare": "husky install",
+    "preview": "pnpm build && vite preview",
+    "reinstall": "rimraf pnpm-lock.yaml && rimraf package.lock.json && rimraf node_modules && npm run bootstrap"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "{!(package)*.json,*.code-snippets,.!(browserslist)*rc}": [
+      "prettier --write--parser json"
+    ],
+    "package.json": [
+      "prettier --write"
+    ],
+    "*.vue": [
+      "prettier --write",
+      "eslint --fix",
+      "stylelint --fix"
+    ],
+    "*.{scss,less,styl,html}": [
+      "prettier --write",
+      "stylelint --fix"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "vue": "^3.2.47"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "@vitejs/plugin-vue": "^4.1.0",
+    "cz-git": "^1.6.1",
+    "czg": "^1.6.1",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.15.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2",
     "postcss-html": "^1.5.0",
     "postcss-less": "^6.0.0",
     "postcss-scss": "^4.0.6",
@@ -36,5 +70,10 @@
     "vite": "^4.3.9",
     "vue-eslint-parser": "^9.3.1",
     "vue-tsc": "^1.4.2"
+  },
+  "packageManager": "pnpm@8.1.0",
+  "engines": {
+    "node": ">=16.15.1",
+    "pnpm": ">=8.1.0"
   }
 }
